@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class StudentResource {
-    @GetMapping("/student")
+    @GetMapping("/student/all")
     public ResponseEntity getAll(){
         Student student = new Student(1L, "Aziz", "Azizov", "3-kurs");
         Student student1 = new Student(1L, "Zafar", "Zafarov", "3-kurs");
@@ -43,16 +43,19 @@ public ResponseEntity getOne(@PathVariable Long id){
     }
 
 
-    @GetMapping("/student/{id}")
+    @GetMapping("/student")
     public ResponseEntity getOne(@RequestParam Long id,
                                  @RequestParam String name,
                                  @RequestParam String lastName,
                                  @RequestParam String course){
-        Student student = new Student(id, "Aziz", "Azizov", "3-kurs");
+        Student student = new Student(id, name, lastName, course);
         return ResponseEntity.ok(student);
     }
 
-
+@DeleteMapping("/student/{id}")
+    public ResponseEntity delete(@PathVariable Long id){
+        return ResponseEntity.ok("malumot o'chirildi");
+}
 
 //    @RequestMapping(value = "/student", method = RequestMethod.GET)
 //    public String hello(){
